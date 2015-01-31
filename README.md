@@ -1,56 +1,43 @@
-# turf-within
+# turf-polygon-within
 
-[![build status](https://secure.travis-ci.org/Turfjs/turf-within.png)](http://travis-ci.org/Turfjs/turf-within)
-
-turf within module
+turf polygon within module
 
 
-### `turf.within(points, polygons)`
+### `within(poly1, poly2)`
 
-Returns a FeatureCollection of points representing all points that fall
-within a collection of polygons.
+Tells you whether poly1 is entirely inside of poly2
 
 
 ### Parameters
 
-| parameter  | type              | description |
-| ---------- | ----------------- | ----------- |
-| `points`   | FeatureCollection |             |
-| `polygons` | FeatureCollection |             |
+| parameter  | type    | description |
+| ---------- | ------- | ----------- |
+| `poly1`    | Polygon |             |
+| `poly2`    | Polygon |             |
 
 
 ### Example
 
 ```js
-var searchWithin = turf.featurecollection([
-  turf.polygon([
-    [[-46.653,-23.543],
-     [-46.634,-23.5346],
-     [-46.613,-23.543],
-     [-46.614,-23.559],
-     [-46.631,-23.567],
-     [-46.653,-23.560],
-     [-46.653,-23.543]]
-  ])
-]);
-var points = turf.featurecollection([
-  turf.point([-46.6318, -23.5523]),
-  turf.point([-46.6246, -23.5325]),
-  turf.point([-46.6062, -23.5513]),
-  turf.point([-46.663, -23.554]),
-  turf.point([-46.643, -23.557])]);
-var ptsWithin = turf.within(points, searchWithin);
-//=points
-//=searchWithin
-//=ptsWithin
-```
+var outside = turf.polygon([[
+  [0, 0],
+  [0, 3],
+  [3, 3],
+  [3, 0],
+  [0, 0]
+]])
 
-## Installation
+var inside = turf.polygon([[
+  [1, 1],
+  [1, 2],
+  [2, 2],
+  [2, 1],
+  [1, 1]
+]]);
 
-Requires [nodejs](http://nodejs.org/).
+var is_within = within(inside, outside);
 
-```sh
-$ npm install turf-within
+// true
 ```
 
 ## Tests
